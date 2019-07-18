@@ -23,7 +23,7 @@ SETUP:
 
 3. Install pip packages
 	in cmd, type:
-	"pip install argparse
+	"pip install argparse"
 	"pip install pypyodbc"
 
 USAGE:
