@@ -10,10 +10,9 @@ import pypyodbc
 # but it should be pretty easy to modify the section of the code that reads the CSV file
 
 TABLES = ['CAPACITOR','CONNECTOR','DIODE_LED','HARDWARE','IC','INDUCTOR','MISC','RESISTOR','SWITCH_RELAY','TRANSISTOR','XTAL_OSC']
-#TABLES = ['CAPACITOR']
 
 #Connect to DB
-conn = pypyodbc.win_connect_mdb('C:\Users\yasirc\Desktop\UpdateLib\TransportPartLibAdditions.mdb')
+conn = pypyodbc.win_connect_mdb('C:\\Users\\yasirc\\Desktop\\UpdateLib\\Transport Part Lib Additions.mdb')
 cursor = conn.cursor()
 
 #service functions
@@ -166,9 +165,9 @@ with open(str(in_path), "r") as csvfile:
   #Remove the head
   next(csvreader_iter)
   for lnum, csv_row in enumerate(csvreader_iter):
-    manupartnum = csv_row[3]
-    ibionum = csv_row[2]
-    eco = PartDbECO(('MANUPARTNUM',manupartnum),{"INT_BIONUM":ibionum, 'DATASHEET':csv_row[5]})
+    manupartnum = csv_row[0]
+    ibionum = csv_row[1]
+    eco = PartDbECO(('MANUPARTNUM',manupartnum),{"INT_BIONUM":ibionum})
     eco.validate()
     if(args.commit and eco.valid_hard()):
       eco.submit()
@@ -185,5 +184,3 @@ with open(str(in_path), "r") as csvfile:
         src=status.src,\
         dst=status.dst))
 conn.close()
-
-
